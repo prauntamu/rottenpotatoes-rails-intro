@@ -12,16 +12,37 @@ class MoviesController < ApplicationController
 
   def index
     
+  # just combined my sorting system with the ratings to try to get them to both populate 
+  #for some reason it only takes on param at a time though
+  # if param is ratings then the movies is made up of only those that have the rating with 
+  #a key in the param 
+  
     case params[:sort]
     when 'title'
-      @movies = Movie.order('title ASC')
+      if params[:ratings]
+        @movies = Movie.where(rating: params[:ratings].keys).order('title ASC')
+      else 
+        @movies = Movie.order('title ASC')
+      end 
     when 'release_date'
-      @movies = Movie.order('release_date ASC')
+      if params[:ratings]
+        @movies = Movie.where(rating: params[:ratings].keys).order('release_date ASC')
+      else 
+        @movies = Movie.order('release_date ASC')
+      end
     else
-      @movies = Movie.all
+      if params[:ratings]
+        @movies = Movie.where(rating: params[:ratings].keys)
+      else 
+        @movies = Movie.all
+      end 
     end
     
     @all_ratings = Movie.all_ratings
+
+
+   ## case params[:ratings]
+
     
     
   end
