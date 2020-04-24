@@ -17,8 +17,11 @@ class MoviesController < ApplicationController
   # if param is ratings then the movies is made up of only those that have the rating with 
   #a key in the param
   
+  #just set the session as whatever the first params are :)
     case params[:sort]
     when 'title'
+      @title_hilite = 'hilite'
+
       session[:sort] = params[:sort]
       if params[:ratings]
         @movies = Movie.where(rating: params[:ratings].keys).order('title ASC')
@@ -27,6 +30,8 @@ class MoviesController < ApplicationController
         @movies = Movie.order('title ASC')
       end 
     when 'release_date'
+      @release_hilite = 'hilite'
+
       session[:sort] = params[:sort]
       if params[:ratings]
         @movies = Movie.where(rating: params[:ratings].keys).order('release_date ASC')
@@ -42,15 +47,19 @@ class MoviesController < ApplicationController
         @movies = Movie.all
       end 
     end
-    
+#did the exact same thing with session as will params 
     case session[:sort]
         when 'title'
+        @title_hilite = 'hilite'
+        
       if  session[:ratings]
         @movies = Movie.where(rating:  session[:ratings].keys).order('title ASC')
       else 
         @movies = Movie.order('title ASC')
       end 
     when 'release_date'
+      @release_hilite = 'hilite'
+
       if  session[:ratings]
         @movies = Movie.where(rating:  session[:ratings].keys).order('release_date ASC')
       else 
@@ -68,10 +77,9 @@ class MoviesController < ApplicationController
     
     
     
-    @all_ratings = Movie.all_ratings
+  @all_ratings = Movie.all_ratings
 
 
-   ## case params[:ratings]
 
     
     

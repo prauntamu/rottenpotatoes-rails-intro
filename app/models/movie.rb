@@ -17,6 +17,7 @@ class Movie < ActiveRecord::Base
         return false 
     end 
     end 
+    
 
       
       

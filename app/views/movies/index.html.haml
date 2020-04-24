@@ -3,6 +3,7 @@
 %h2 All Movies
 //just added the forms and the submit that are required 
 //plus the persistent check box and default all checked 
+//just used session instead of params since the result would be true regardless if its null
 = form_tag movies_path,:id => "ratings_form", :method => :get do
   Include:
   - @all_ratings.each do |rating|
