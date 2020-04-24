@@ -7,7 +7,7 @@
   Include:
   - @all_ratings.each do |rating|
     = rating
-    =check_box_tag "ratings[#{rating}]", 1, (true if Movie.with_ratings(rating, params[:ratings]) ),:id => "ratings_#{rating}"
+    =check_box_tag "ratings[#{rating}]", 1, (true if Movie.with_ratings(rating, session[:ratings]) ),:id => "ratings_#{rating}"
   = submit_tag 'Refresh', {:id=>'ratings_submit'}
 
   
